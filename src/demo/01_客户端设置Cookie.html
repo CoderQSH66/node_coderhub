@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>哈哈哈哈</h2>
+    <button>设置Cookie</button>
+    <script>
+      const btn = document.querySelector("button")
+
+      btn.onclick = () => {
+        // 1、设置内存cookie
+        document.cookie = "name=why"
+        document.cookie = "age=26"
+
+        // 2、设置硬盘cookie
+        document.cookie = "height=186;max-age=3600"
+      }
+    </script>
+  </body>
+</html>
