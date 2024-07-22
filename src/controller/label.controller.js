@@ -1,5 +1,6 @@
 const LabelService = require("../service/label.service")
 const { DATABASE_OPERATE_ERROR } = require("../config/error-cont")
+const labelService = require("../service/label.service")
 
 class LabelController {
   /** 创建标签 */
@@ -28,9 +29,18 @@ class LabelController {
           continue
         } else {
           // 添加至数据库
+          const result = await labelService.addLabelToMoment(momentId, label.id)
         }
       }
-    } catch (error) {}
+      ctx.body = {
+        code: 200,
+        msg: "添加成功",
+        data: null
+      }
+    } catch (error) {
+      console.log(error)
+      ctx.app.emit("error", DATABASE_OPERATE_ERROR, ctx)
+    }
   }
 }
 

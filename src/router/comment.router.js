@@ -11,5 +11,10 @@ const router = new Router({ prefix: "/comment" })
 router.post("/create", verifyToken, CommentController.createComment)
 
 // 删除评论
-router.delete("/delete/:commentId", verifyToken, verifyPermission, CommentController.deleteComment)
+router.delete(
+  "/delete/:commentId",
+  verifyToken,
+  verifyPermission,
+  CommentController.deleteComment
+)
 module.exports = router

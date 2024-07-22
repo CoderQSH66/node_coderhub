@@ -22,7 +22,8 @@ class MomentService {
     let statement = `
                   SELECT m.id,m.content,m.createAt,m.updateAt, 
                   JSON_OBJECT("id", u.id, "name", u.name, "telphone", u.telphone) AS user_info,
-                  (SELECT COUNT(*) FROM comment WHERE moment_id = m.id) As total
+                  (SELECT COUNT(*) FROM comment WHERE moment_id = m.id) As total,
+                  (SELECT COUNT(*) FROM moment_label WHERE moment_id = m.id) As labelCount
                   FROM moment As m LEFT JOIN user AS u
                   ON u.id = m.user_id
                   `
@@ -32,7 +33,10 @@ class MomentService {
       result = resluts
     } else {
       statement += ` LIMIT ?, ?`
-      const [resluts] = await pool.execute(statement, [String(offset), String(limit)])
+      const [resluts] = await pool.execute(statement, [
+        String(offset),
+        String(limit)
+      ])
       result = resluts
     }
     return result
@@ -51,7 +55,8 @@ class MomentService {
                       (SELECT JSON_ARRAYAGG(JSON_OBJECT('commentId', id, "content", content)) FROM comment
                       WHERE comment_id = c.id
                       GROUP BY comment_id 
-                      )) AS comment_info
+                      )) AS comment_info,
+                      (SELECT COUNT(*) FROM moment_label WHERE moment_id = m.id) As labelCount
                       FROM moment As m LEFT JOIN user AS u 
                       ON m.user_id = u.id 
                       LEFT JOIN comment AS c

@@ -2,6 +2,7 @@ const mysql2 = require("mysql2")
 
 // 创建数据库连接池
 const pool = mysql2.createPool({
+  port: "13306",
   host: "localhost",
   user: "root",
   password: "root",

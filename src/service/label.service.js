@@ -27,9 +27,16 @@ class LabelService {
    * @returns Boolean
    */
   async isChecked(momentId, labelId) {
-    const statement = "SELECT * FROM moment_label WHERE moment_id = ? and label_id = ?"
+    const statement =
+      "SELECT * FROM moment_label WHERE moment_id = ? and label_id = ?"
     const [results] = await pool.execute(statement, [momentId, labelId])
     return !!results.length
+  }
+  async addLabelToMoment(momentId, labelId) {
+    const statement =
+      "INSERT INTO moment_label(moment_id, label_id) VALUES(?, ?)"
+    const [results] = await pool.execute(statement, [momentId, labelId])
+    return results
   }
 }
 
