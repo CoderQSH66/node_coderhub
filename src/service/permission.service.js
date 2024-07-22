@@ -8,9 +8,9 @@ class PermissionService {
    * @param {String} userId
    * @returns Promise
    */
-  async checkPermission(resouseNmae, momentId, userId) {
+  async checkPermission(resouseNmae, resouseId, userId) {
     const statement = `SELECT * FROM ${resouseNmae} WHERE id = ? AND user_id = ?`
-    const [result] = await pool.execute(statement, [momentId, userId])
+    const [result] = await pool.execute(statement, [resouseId, userId])
     return result
   }
 }

@@ -5,9 +5,10 @@ const PermissionService = require("../service/permission.service")
 const verifyPermission = async (ctx, next) => {
   try {
     const { id: userId } = ctx.decoded
-    const { momentId } = ctx.params
+    const key = Object.keys(ctx.params)[0]
+    const resouseId = ctx.params[key]
     const resouseNmae = Object.keys(ctx.params)[0].replace("Id", "")
-    const result = await PermissionService.checkPermission(resouseNmae, momentId, userId)
+    const result = await PermissionService.checkPermission(resouseNmae, resouseId, userId)
     if (result.length === 0) {
       return ctx.app.emit("error", NOT_UPDATE_PERMISSION, ctx)
     }

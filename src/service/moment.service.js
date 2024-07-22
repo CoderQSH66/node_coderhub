@@ -20,7 +20,7 @@ class MomentService {
    */
   async queryMoment(offset, limit) {
     let statement = `
-                  SELECT m.id,m.content, m.createAt,m.updateAt, 
+                  SELECT m.id,m.content,m.createAt,m.updateAt, 
                   JSON_OBJECT("id", u.id, "name", u.name, "telphone", u.telphone) AS user_info,
                   (SELECT COUNT(*) FROM comment WHERE moment_id = m.id) As total
                   FROM moment As m LEFT JOIN user AS u

@@ -7,7 +7,7 @@ class LoginController {
     const payload = ctx.request.body
     const token = jwt.sign(payload, privateKey, {
       algorithm: "RS256",
-      expiresIn: 60 * 60
+      expiresIn: 60 * 60 * 24
     })
 
     ctx.body = {
