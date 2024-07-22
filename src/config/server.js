@@ -5,4 +5,4 @@ const dotenv = require("dotenv")
 dotenv.config()
 
 // 导出配置
-module.exports = { SEVER_PORT } = process.env
+module.exports = { SEVER_PORT, SEVER_HOST } = process.env

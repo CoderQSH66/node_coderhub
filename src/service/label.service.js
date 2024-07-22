@@ -32,6 +32,12 @@ class LabelService {
     const [results] = await pool.execute(statement, [momentId, labelId])
     return !!results.length
   }
+  /**
+   * @description 向moment_label表中添加标签
+   * @param {*} momentId
+   * @param {*} labelId
+   * @returns
+   */
   async addLabelToMoment(momentId, labelId) {
     const statement =
       "INSERT INTO moment_label(moment_id, label_id) VALUES(?, ?)"

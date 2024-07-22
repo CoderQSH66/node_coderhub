@@ -29,7 +29,7 @@ class LabelController {
           continue
         } else {
           // 添加至数据库
-          const result = await labelService.addLabelToMoment(momentId, label.id)
+          await labelService.addLabelToMoment(momentId, label.id)
         }
       }
       ctx.body = {
